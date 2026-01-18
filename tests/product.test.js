@@ -28,7 +28,6 @@ describe('Product API', () => {
 
   describe('GET /api/products/:id', () => {
     it('should get product by ID if exists', async () => {
-      // First get all products to find an ID
       const allProductsResponse = await request(app)
         .get('/api/products');
 

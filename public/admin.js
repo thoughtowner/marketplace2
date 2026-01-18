@@ -1,6 +1,3 @@
-// JavaScript для админ-панели
-
-// Утилита для безопасной вставки текста в HTML
 function escapeHtml(str) {
     if (typeof str !== 'string') return '';
     return str
@@ -47,8 +44,6 @@ function setupTabs() {
 }
 
 async function loadUsers() {
-    // В реальном приложении нужен эндпоинт для получения списка пользователей
-    // Пока показываем заглушку
     const usersList = document.getElementById('users-list');
     if (usersList) {
         usersList.innerHTML = '<p>Функционал получения списка пользователей требует дополнительного эндпоинта API</p>';
@@ -153,4 +148,3 @@ async function adminDeleteStore(storeId) {
 }
 
 document.addEventListener('DOMContentLoaded', initAdmin);
-

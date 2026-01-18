@@ -1,6 +1,3 @@
-// JavaScript для страницы магазинов
-
-// Утилита для безопасной вставки текста в HTML
 function escapeHtml(str) {
     if (typeof str !== 'string') return '';
     return str
@@ -36,7 +33,6 @@ function displayStores(stores) {
         </div>
     `).join('');
 
-    // Навешиваем обработчики на кнопки просмотра товаров
     storesList.querySelectorAll('.btn-view').forEach(btn => {
         btn.addEventListener('click', (e) => {
             const id = parseInt(btn.dataset.storeId, 10);
@@ -74,7 +70,6 @@ function showStoreProducts(data) {
     `;
     document.body.appendChild(modal);
 
-    // Навешиваем обработчик на кнопку закрытия модального окна
     const closeBtn = modal.querySelector('.close-modal');
     if (closeBtn) closeBtn.addEventListener('click', () => modal.remove());
 }

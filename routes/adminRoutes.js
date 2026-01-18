@@ -6,11 +6,9 @@ import { z } from 'zod';
 
 const router = express.Router();
 
-// Все роуты требуют аутентификации и роли администратора
 router.use(authenticateToken);
 router.use(requireRole('admin'));
 
-// Схемы валидации для админских операций
 const deleteUserSchema = z.object({
   params: z.object({
     id: z.string().regex(/^\d+$/, 'User ID must be a number')

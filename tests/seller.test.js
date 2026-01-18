@@ -55,7 +55,6 @@ describe('Seller API', () => {
     });
 
     it('should require store to exist', async () => {
-      // This test assumes store was created in previous test
       const response = await request(app)
         .post('/api/seller/products')
         .set('Authorization', `Bearer ${sellerToken}`)
@@ -64,7 +63,6 @@ describe('Seller API', () => {
           price: 75
         });
 
-      // Should work if store exists, or fail if not
       expect([201, 404]).toContain(response.status);
     });
   });
@@ -82,13 +80,11 @@ describe('Seller API', () => {
 
   describe('POST /api/seller/withdraw', () => {
     it('should withdraw money from seller account', async () => {
-      // First, seller needs to have money (from sales)
       const response = await request(app)
         .post('/api/seller/withdraw')
         .set('Authorization', `Bearer ${sellerToken}`)
         .send({ amount: 10 });
 
-      // May fail if insufficient funds, which is expected
       expect([200, 400]).toContain(response.status);
     });
   });

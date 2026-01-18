@@ -1,10 +1,6 @@
 import request from 'supertest';
 import app from '../index.js';
 import { AppDataSource } from '../config/data-source.js';
-import { User } from '../models/User.js';
-import { Consumer } from '../models/Consumer.js';
-import { Seller } from '../models/Seller.js';
-import { Admin } from '../models/Admin.js';
 
 describe('Auth API', () => {
   beforeAll(async () => {
@@ -17,11 +13,6 @@ describe('Auth API', () => {
     if (AppDataSource.isInitialized) {
       await AppDataSource.destroy();
     }
-  });
-
-  beforeEach(async () => {
-    // Clean up test data - simplified for now
-    // In production, use proper test database or cleanup strategy
   });
 
   describe('POST /api/auth/register', () => {

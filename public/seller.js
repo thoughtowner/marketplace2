@@ -1,5 +1,3 @@
-// JavaScript для страницы продавца
-
 async function loadSellerData() {
     const user = storage.getUser();
     if (!user || user.role !== 'seller') {
@@ -40,7 +38,6 @@ function displayProducts(products) {
         return;
     }
 
-    // Рендерим карточки с data-атрибутами (без inline onclick)
     productsList.innerHTML = products.map(item => {
         const product = item.product || item;
         const available = item.quantity || 0;
@@ -59,7 +56,6 @@ function displayProducts(products) {
         `;
     }).join('');
 
-    // Навешиваем обработчики событий
     productsList.querySelectorAll('.btn-increase').forEach(btn => {
         btn.addEventListener('click', (e) => {
             const id = parseInt(btn.dataset.productId, 10);
@@ -84,7 +80,6 @@ function displayProducts(products) {
     });
 }
 
-// простые утилиты для экранирования (предотвращают разрывы HTML/JS при вставке строк)
 function escapeHtml(str) {
     if (typeof str !== 'string') return '';
     return str

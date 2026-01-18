@@ -1,8 +1,5 @@
-// Базовый JavaScript для работы с API и аутентификацией
-
 const API_BASE_URL = '/api';
 
-// Утилиты для работы с localStorage
 const storage = {
     getToken: () => localStorage.getItem('token'),
     setToken: (token) => localStorage.setItem('token', token),
@@ -12,7 +9,6 @@ const storage = {
     removeUser: () => localStorage.removeItem('user')
 };
 
-// Функция для выполнения API запросов
 async function apiRequest(endpoint, options = {}) {
     const token = storage.getToken();
     const headers = {
@@ -43,7 +39,6 @@ async function apiRequest(endpoint, options = {}) {
     }
 }
 
-// Инициализация страницы
 function initPage() {
     const token = storage.getToken();
     const user = storage.getUser();
@@ -54,13 +49,11 @@ function initPage() {
         showUnauthenticatedUI();
     }
 
-    // Обработка выхода
     const logoutBtn = document.getElementById('logout-btn');
     if (logoutBtn) {
         logoutBtn.addEventListener('click', logout);
     }
 
-    // Обработка вкладок аутентификации
     const tabBtns = document.querySelectorAll('.tab-btn');
     tabBtns.forEach(btn => {
         btn.addEventListener('click', () => {
@@ -69,7 +62,6 @@ function initPage() {
         });
     });
 
-    // Обработка форм входа и регистрации
     const loginForm = document.getElementById('loginForm');
     const registerForm = document.getElementById('registerForm');
 
@@ -93,7 +85,6 @@ function showAuthenticatedUI(user) {
     if (userInfo) userInfo.textContent = `${user.login} (${user.role})`;
     if (logoutBtn) logoutBtn.style.display = 'block';
 
-    // Показываем соответствующие ссылки в зависимости от роли
     if (user.role === 'consumer') {
         const cartLink = document.getElementById('cart-link');
         if (cartLink) cartLink.style.display = 'block';
@@ -208,6 +199,4 @@ function showMessage(message, type = 'success') {
     }
 }
 
-// Инициализация при загрузке страницы
 document.addEventListener('DOMContentLoaded', initPage);
-

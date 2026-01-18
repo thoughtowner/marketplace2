@@ -1,13 +1,6 @@
 import request from 'supertest';
 import app from '../index.js';
 import { AppDataSource } from '../config/data-source.js';
-import { User } from '../models/User.js';
-import { Consumer } from '../models/Consumer.js';
-import { Store } from '../models/Store.js';
-import { Product } from '../models/Product.js';
-import { StoreProduct } from '../models/StoreProduct.js';
-import { Cart } from '../models/Cart.js';
-import jwt from 'jsonwebtoken';
 
 describe('Consumer API', () => {
   let consumerToken;
@@ -21,7 +14,6 @@ describe('Consumer API', () => {
       await AppDataSource.initialize();
     }
 
-    // Create consumer user
     const consumerRegisterResponse = await request(app)
       .post('/api/auth/register')
       .send({
@@ -32,7 +24,6 @@ describe('Consumer API', () => {
     consumerToken = consumerRegisterResponse.body.token;
     consumerUserId = consumerRegisterResponse.body.user.id;
 
-    // Create seller user and store
     const sellerRegisterResponse = await request(app)
       .post('/api/auth/register')
       .send({
@@ -137,13 +128,11 @@ describe('Consumer API', () => {
 
   describe('POST /api/consumer/cart/purchase', () => {
     it('should purchase all items in cart', async () => {
-      // First deposit money
       await request(app)
         .post('/api/consumer/deposit')
         .set('Authorization', `Bearer ${consumerToken}`)
         .send({ amount: 5000 });
 
-      // Add product to cart
       await request(app)
         .post('/api/consumer/cart')
         .set('Authorization', `Bearer ${consumerToken}`)

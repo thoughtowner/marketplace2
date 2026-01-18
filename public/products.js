@@ -1,6 +1,3 @@
-// JavaScript для страницы товаров
-
-// Утилита для безопасной вставки текста в HTML
 function escapeHtml(str) {
     if (typeof str !== 'string') return '';
     return str
@@ -39,7 +36,6 @@ function displayProducts(products) {
         </div>
     `).join('');
 
-    // Навешиваем обработчики на кнопки "Подробнее"
     productsList.querySelectorAll('.btn-view').forEach(btn => {
         btn.addEventListener('click', () => {
             const id = parseInt(btn.dataset.productId, 10);
@@ -81,7 +77,6 @@ function showProductDetails(product) {
     `;
     document.body.appendChild(modal);
 
-    // Навешиваем обработчики внутри модалки
     const closeBtn = modal.querySelector('.btn-close-modal');
     if (closeBtn) closeBtn.addEventListener('click', () => modal.remove());
 
@@ -102,7 +97,6 @@ function showProductDetails(product) {
                 });
                 showMessage('Товар добавлен в корзину', 'success');
 
-                // Обновляем отображаемое доступное количество на странице без перезагрузки
                 const cardQtyElem = document.querySelector(`.product-card[data-product-id="${product.id}"] .quantity`);
                 if (cardQtyElem) {
                     const match = cardQtyElem.textContent.match(/\d+/);
@@ -141,4 +135,3 @@ async function addToCart(productId) {
 }
 
 document.addEventListener('DOMContentLoaded', loadProducts);
-

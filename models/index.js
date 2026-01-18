@@ -7,5 +7,3 @@ export { Product } from './Product.js';
 export { Cart } from './Cart.js';
 export { ConsumerProduct } from './ConsumerProduct.js';
 export { StoreProduct } from './StoreProduct.js';
-
-

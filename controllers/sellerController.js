@@ -6,27 +6,6 @@ import { StoreProduct } from '../models/StoreProduct.js';
 import { Cart } from '../models/Cart.js';
 import { ConsumerProduct } from '../models/ConsumerProduct.js';
 
-/**
- * Снимает деньги со счёта продавца
- * 
- * Уменьшает баланс продавца на указанную сумму.
- * Продавец может только снимать деньги со счёта (уменьшать баланс),
- * увеличивать баланс напрямую нельзя - деньги начисляются только
- * при продаже товаров покупателями.
- * 
- * @param {Object} req - Express request объект
- * @param {Object} req.body - Тело запроса
- * @param {number} req.body.amount - Сумма для снятия (должна быть положительной)
- * @param {Object} req.user - Аутентифицированный пользователь
- * @param {Object} req.user.seller - Объект продавца
- * @param {number} req.user.seller.id - ID продавца
- * @param {Object} res - Express response объект
- * @param {Function} next - Express next middleware функция
- * @returns {Promise<void>}
- * 
- * @throws {404} Если продавец не найден
- * @throws {400} Если недостаточно средств
- */
 export const withdrawMoney = async (req, res, next) => {
   try {
     const { amount } = req.body;
@@ -58,31 +37,6 @@ export const withdrawMoney = async (req, res, next) => {
   }
 };
 
-/**
- * Создаёт новый товар в магазине продавца
- * 
- * Добавляет новый товар в магазин продавца. Процесс включает:
- * 1. Проверку существования магазина у продавца
- * 2. Создание записи товара в таблице products
- * 3. Опциональное создание записи в store_to_product с указанным количеством
- * 
- * Если количество не указано, товар создаётся без записи в store_to_product,
- * что означает, что товар есть в системе, но его количество равно 0.
- * 
- * @param {Object} req - Express request объект
- * @param {Object} req.body - Тело запроса
- * @param {string} req.body.title - Название товара
- * @param {number} req.body.price - Цена товара (должна быть положительной)
- * @param {number} [req.body.quantity] - Начальное количество товара (опционально)
- * @param {Object} req.user - Аутентифицированный пользователь
- * @param {Object} req.user.seller - Объект продавца
- * @param {number} req.user.seller.id - ID продавца
- * @param {Object} res - Express response объект
- * @param {Function} next - Express next middleware функция
- * @returns {Promise<void>}
- * 
- * @throws {404} Если магазин не найден
- */
 export const createProduct = async (req, res, next) => {
   try {
     const { title, price, quantity } = req.body;
@@ -185,7 +139,6 @@ export const deleteProduct = async (req, res, next) => {
       return res.status(404).json({ error: 'Product not found' });
     }
 
-    // Удаляем зависимые записи чтобы избежать нарушений FK:
     const storeProductRepository = AppDataSource.getRepository(StoreProduct);
     await storeProductRepository.delete({ productId });
 
@@ -195,7 +148,6 @@ export const deleteProduct = async (req, res, next) => {
     const cartRepository = AppDataSource.getRepository(Cart);
     await cartRepository.delete({ productId });
 
-    // Удаляем сам товар
     await productRepository.delete({ id: productId });
 
     res.json({

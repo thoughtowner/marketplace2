@@ -1,8 +1,5 @@
-// JavaScript для страницы корзины
-
 let consumerBalance = 0;
 
-// Утилита для безопасной вставки текста в HTML
 function escapeHtml(str) {
     if (typeof str !== 'string') return '';
     return str
@@ -24,7 +21,6 @@ async function loadCart() {
         const cartData = await apiRequest('/consumer/cart');
         displayCart(cartData.cartItems);
 
-        // Показать баланс покупателя (берём из ответа сервера)
         const balanceElem = document.getElementById('balance');
         if (balanceElem) {
             const bal = parseFloat(cartData.balance || 0);
@@ -67,7 +63,6 @@ function displayCart(cartItems) {
         `;
     }).join('');
 
-    // Навешиваем обработчики на кнопки обновления и удаления
     cartItemsDiv.querySelectorAll('.btn-update').forEach(btn => {
         btn.addEventListener('click', () => {
             const id = parseInt(btn.dataset.productId, 10);
@@ -172,4 +167,3 @@ document.addEventListener('DOMContentLoaded', () => {
         depositBtn.addEventListener('click', depositMoney);
     }
 });
-

@@ -3,20 +3,6 @@ import { Store } from '../models/Store.js';
 import { Product } from '../models/Product.js';
 import { StoreProduct } from '../models/StoreProduct.js';
 
-/**
- * Получает все товары конкретного магазина
- * 
- * Этот контроллер обрабатывает запрос на получение всех товаров,
- * принадлежащих конкретному магазину. Возвращает список товаров
- * с информацией о доступном количестве каждого товара.
- * 
- * @param {Object} req - Express request объект
- * @param {Object} req.params - Параметры маршрута
- * @param {string} req.params.id - ID магазина
- * @param {Object} res - Express response объект
- * @param {Function} next - Express next middleware функция
- * @returns {Promise<void>}
- */
 export const getStoreProducts = async (req, res, next) => {
   try {
     const storeId = parseInt(req.params.id);
@@ -66,17 +52,6 @@ export const getStoreProducts = async (req, res, next) => {
   }
 };
 
-/**
- * Получает список всех магазинов
- * 
- * Возвращает список всех магазинов в системе с информацией
- * о продавцах, владеющих этими магазинами.
- * 
- * @param {Object} req - Express request объект
- * @param {Object} res - Express response объект
- * @param {Function} next - Express next middleware функция
- * @returns {Promise<void>}
- */
 export const getAllStores = async (req, res, next) => {
   try {
     const storeRepository = AppDataSource.getRepository(Store);
