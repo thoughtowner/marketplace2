@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Админ-панель - marketplace2</title>
+    
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <h1 class="logo"><a href="/">marketplace2</a></h1>
+            <div class="nav-links">
+                <span id="user-info"></span>
+                <button id="logout-btn" style="display: none;">Выйти</button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h2>Админ-панель</h2>
+        
+        <div class="admin-section">
+            <div class="admin-tabs">
+                <button class="tab-btn active" data-tab="users">Пользователи</button>
+                <button class="tab-btn" data-tab="products">Товары</button>
+                <button class="tab-btn" data-tab="stores">Магазины</button>
+            </div>
+
+            <div id="users-tab" class="admin-tab-content active">
+                <h3>Управление пользователями</h3>
+                <div id="users-list" class="admin-list">
+                    <p>Загрузка пользователей...</p>
+                </div>
+            </div>
+
+            <div id="products-tab" class="admin-tab-content">
+                <h3>Управление товарами</h3>
+                <div id="admin-products-list" class="products-grid">
+                    <p>Загрузка товаров...</p>
+                </div>
+            </div>
+
+            <div id="stores-tab" class="admin-tab-content">
+                <h3>Управление магазинами</h3>
+                <div id="admin-stores-list" class="stores-grid">
+                    <p>Загрузка магазинов...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/app.js"></script>
+    <script src="/admin.js"></script>
+</body>
+</html>
+

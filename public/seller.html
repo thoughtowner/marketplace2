@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мой магазин - marketplace2</title>
+    
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <h1><a href="/">marketplace2</a></h1>
+            <div>
+                <span id="user-info"></span>
+                <button id="logout-btn" style="display: none;">Выйти</button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h2>Мой магазин</h2>
+        
+        <div class="seller-section">
+            <div class="balance-section">
+                <h3>Мой баланс</h3>
+                <p id="seller-balance">0 ₽</p>
+                <div class="form-group">
+                    <input type="number" id="withdraw-amount" placeholder="Сумма вывода" min="0.01" step="0.01">
+                    <button id="withdraw-btn" class="btn-primary">Вывести</button>
+                </div>
+            </div>
+
+            <div class="store-section">
+                <h3>Информация о магазине</h3>
+                <div id="store-info">
+                    <p>Загрузка...</p>
+                </div>
+                <div id="create-store-form" style="display: none;">
+                    <h4>Создать магазин</h4>
+                    <form id="createStoreForm">
+                        <div class="form-group">
+                            <label for="store-title">Название магазина:</label>
+                            <input type="text" id="store-title" required>
+                        </div>
+                        <button type="submit" class="btn-primary">Создать</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="products-section">
+                <h3>Товары в магазине</h3>
+                <button id="add-product-btn" class="btn-primary">Добавить товар</button>
+                <div id="add-product-form" style="display: none;">
+                    <form id="addProductForm">
+                        <div class="form-group">
+                            <label for="product-title">Название:</label>
+                            <input type="text" id="product-title" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="product-price">Цена:</label>
+                            <input type="number" id="product-price" required min="0.01" step="0.01">
+                        </div>
+                        <div class="form-group">
+                            <label for="product-quantity">Количество:</label>
+                            <input type="number" id="product-quantity" min="0" value="0">
+                        </div>
+                        <button type="submit" class="btn-primary">Добавить</button>
+                        <button type="button" class="btn-secondary" id="cancel-add-product">Отмена</button>
+                    </form>
+                </div>
+                <div id="seller-products-list" class="products-grid">
+                    <p>Загрузка товаров...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/app.js"></script>
+    <script src="/seller.js"></script>
+</body>
+</html>
+
